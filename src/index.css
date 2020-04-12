@@ -11,14 +11,20 @@ ol li:last-child button {
   font-weight: bold;
 }
 
-.board-row:after {
+/* .board-row:after {
   clear: both;
   content: "";
   display: table;
-}
+} */
 
 .status {
   margin-bottom: 10px;
+}
+
+.board{
+  display: flex;
+  flex-wrap: wrap;
+  width: 99px;
 }
 
 .square {
