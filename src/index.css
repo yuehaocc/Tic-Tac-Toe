@@ -3,7 +3,8 @@ body {
   margin: 20px;
 }
 
-ol, ul {
+ol,
+ul {
   padding-left: 30px;
 }
 
@@ -21,7 +22,7 @@ ol li.active button {
   margin-bottom: 10px;
 }
 
-.board{
+.board {
   display: flex;
   flex-wrap: wrap;
   width: 99px;
@@ -40,6 +41,10 @@ ol li.active button {
   padding: 0;
   text-align: center;
   width: 34px;
+}
+
+.highlight {
+  color: green;
 }
 
 .square:focus {

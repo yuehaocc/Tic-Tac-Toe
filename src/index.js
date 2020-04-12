@@ -6,11 +6,12 @@ class Board extends React.Component {
   render() {
     return (
       <div>
+        {/* <h1>{this.props.highlightData}</h1> */}
         <div className="board">
           {
             Array(9).fill(null).map((item, index) => (
               <button
-                className="square"
+                className={`square ${(this.props.highlightData.indexOf(index) !== -1) ? 'highlight' : undefined}`}
                 onClick={() => this.props.onClick(index)}
                 key={index}
               >
@@ -68,7 +69,7 @@ class Game extends React.Component {
   render() {
     const { history } = this.state;
     const currentState = history[this.state.stepNumber];
-    const winner = calculateWinner(currentState.squareData);
+    const winnerLine = calculateWinner(currentState.squareData);
 
     const moves = history.map((step, move) => {
       const desc = move ? `Go to move #${move}, location: ${(step.lastIndex % 3) + 1} -  ${Math.floor(step.lastIndex / 3) + 1}` : 'Go to game start';
@@ -80,8 +81,8 @@ class Game extends React.Component {
     })
 
     let status;
-    if (winner) {
-      status = `Winner is: ${winner}`;
+    if (winnerLine) {
+      status = `Winner is: ${currentState.squareData[winnerLine[0]]}`;
     } else if (this.state.stepNumber === 9) {
       status = 'It is draw!';
     } else {
@@ -91,7 +92,7 @@ class Game extends React.Component {
     return (
       <div className="game">
         <div className="game-board">
-          <Board data={currentState.squareData} onClick={(i) => this.handleClick(i)} />
+          <Board data={currentState.squareData} highlightData={winnerLine || []} onClick={(i) => this.handleClick(i)} />
         </div>
         <div className="game-info">
           <div>{status}</div>
@@ -124,7 +125,9 @@ function calculateWinner(squares) {
   for (let i = 0; i < lines.length; i++) {
     const [a, b, c] = lines[i];
     if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-      return squares[a];
+      // return squares[a];
+      // 获得胜利坐标
+      return lines[i];
     }
   }
   return null;
